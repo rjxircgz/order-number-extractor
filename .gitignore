@@ -1,0 +1,9 @@
+# .gitignore
+
+# Ignore the .aider directory
+.aider/
+
+# Ignore the .aider chat history and input history files
+.aider.chat.history.md
+.aider.input.history
+/.aider.tags.cache.v4

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Text Extractor</title>
   <style>
     body {
+      width: 250px;
+      padding: 10px;
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f9f9f9;
     }
-    h1 {
-      color: #333;
+    #message {
+      margin-bottom: 10px;
     }
-    p {
-      color: #666;
+    .copy-button {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+    .copy-button:hover {
+      background-color: #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Order Text Extractor!</h1>
-  <p>Right-click on an image to extract and copy text using OCR.</p>
+  <div id="message"></div>
+  
+  <!-- This will be dynamically populated with copy buttons -->
+  <div id="copy-buttons-container"></div>
+
+  <script src="popup.js"></script>
 </body>
 </html>
