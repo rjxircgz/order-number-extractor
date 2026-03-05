@@ -73,31 +73,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
               args: [result.extractedValue]
             });
             
-            // Show toaster notification
-            await chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              files: ['toastr.min.js']
-            });
-            await chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              func: () => {
-                toastr.success('Text has been copied to clipboard.', 'Clipboard Copied');
-              }
-            });
+            // Show notification
+            reg.showNotification('Clipboard Copied', 'Text has been copied to clipboard.');
           } catch (e) {
             console.log('Clipboard copy failed:', e);
             
-            // Show toaster notification for clipboard copy failure
-            await chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              files: ['toastr.min.js']
-            });
-            await chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              func: () => {
-                toastr.error('Failed to copy text to clipboard.', 'Clipboard Copy Failed');
-              }
-            });
+            // Show notification for clipboard copy failure
+            reg.showNotification('Clipboard Copy Failed', 'Failed to copy text to clipboard.');
           }
           
           chrome.storage.local.set({ 
@@ -146,17 +128,8 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         chrome.action.setBadgeText({ text: '✗' });
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
         
-        // Show toaster notification for OCR error
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ['toastr.min.js']
-        });
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: () => {
-            toastr.error(errorMsg, 'OCR Error');
-          }
-        });
+        // Show notification for OCR error
+        reg.showNotification('OCR Error', errorMsg);
       }
     }
   }
