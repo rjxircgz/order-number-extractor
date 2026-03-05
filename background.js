@@ -74,9 +74,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             });
             
             // Show toaster notification
-            chrome.scripting.executeScript({
+            await chrome.scripting.executeScript({
               target: { tabId: tab.id },
-              files: ['toastr.min.js'],
+              files: ['toastr.min.js']
+            });
+            await chrome.scripting.executeScript({
+              target: { tabId: tab.id },
               func: () => {
                 toastr.success('Text has been copied to clipboard.', 'Clipboard Copied');
               }
@@ -85,9 +88,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             console.log('Clipboard copy failed:', e);
             
             // Show toaster notification for clipboard copy failure
-            chrome.scripting.executeScript({
+            await chrome.scripting.executeScript({
               target: { tabId: tab.id },
-              files: ['toastr.min.js'],
+              files: ['toastr.min.js']
+            });
+            await chrome.scripting.executeScript({
+              target: { tabId: tab.id },
               func: () => {
                 toastr.error('Failed to copy text to clipboard.', 'Clipboard Copy Failed');
               }
@@ -141,9 +147,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
         
         // Show toaster notification for OCR error
-        chrome.scripting.executeScript({
+        await chrome.scripting.executeScript({
           target: { tabId: tab.id },
-          files: ['toastr.min.js'],
+          files: ['toastr.min.js']
+        });
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
           func: () => {
             toastr.error(errorMsg, 'OCR Error');
           }
