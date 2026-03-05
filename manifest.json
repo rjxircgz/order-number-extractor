@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Order Text Extractor",
+  "version": "1.0",
+  "description": "Extract text from images using OCR when right-clicking",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "storage",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "https://cdn.jsdelivr.net/*",
+    "https://unpkg.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
