@@ -74,12 +74,22 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             });
             
             // Show notification
-            reg.showNotification('Clipboard Copied', 'Text has been copied to clipboard.');
+            chrome.notifications.create('clipboardCopied', {
+              type: 'basic',
+              iconUrl: 'icon.png', // Replace with your extension's icon path
+              title: 'Clipboard Copied',
+              message: 'Text has been copied to clipboard.'
+            });
           } catch (e) {
             console.log('Clipboard copy failed:', e);
             
             // Show notification for clipboard copy failure
-            reg.showNotification('Clipboard Copy Failed', 'Failed to copy text to clipboard.');
+            chrome.notifications.create('clipboardCopyFailed', {
+              type: 'basic',
+              iconUrl: 'icon.png', // Replace with your extension's icon path
+              title: 'Clipboard Copy Failed',
+              message: 'Failed to copy text to clipboard.'
+            });
           }
           
           chrome.storage.local.set({ 
@@ -129,7 +139,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
         
         // Show notification for OCR error
-        reg.showNotification('OCR Error', errorMsg);
+        chrome.notifications.create('ocrError', {
+          type: 'basic',
+          iconUrl: 'icon.png', // Replace with your extension's icon path
+          title: 'OCR Error',
+          message: errorMsg
+        });
       }
     }
   }
