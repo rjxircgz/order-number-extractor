@@ -73,22 +73,24 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
               args: [result.extractedValue]
             });
             
-            // Show notification
-            chrome.notifications.create('copySuccess', {
-              type: 'basic',
-              iconUrl: 'icons/icon16.png', // Updated icon path
-              title: 'Clipboard Copied',
-              message: 'Text has been copied to clipboard.'
+            // Show toaster notification
+            chrome.scripting.executeScript({
+              target: { tabId: tab.id },
+              files: ['toastr.min.js'],
+              func: () => {
+                toastr.success('Text has been copied to clipboard.', 'Clipboard Copied');
+              }
             });
           } catch (e) {
             console.log('Clipboard copy failed:', e);
             
-            // Show notification for clipboard copy failure
-            chrome.notifications.create('copyFailure', {
-              type: 'basic',
-              iconUrl: 'icons/icon16.png', // Updated icon path
-              title: 'Clipboard Copy Failed',
-              message: 'Failed to copy text to clipboard.'
+            // Show toaster notification for clipboard copy failure
+            chrome.scripting.executeScript({
+              target: { tabId: tab.id },
+              files: ['toastr.min.js'],
+              func: () => {
+                toastr.error('Failed to copy text to clipboard.', 'Clipboard Copy Failed');
+              }
             });
           }
           
@@ -138,12 +140,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         chrome.action.setBadgeText({ text: '✗' });
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
         
-        // Show notification for OCR error
-        chrome.notifications.create('ocrError', {
-          type: 'basic',
-          iconUrl: 'icons/icon16.png', // Updated icon path
-          title: 'OCR Error',
-          message: errorMsg
+        // Show toaster notification for OCR error
+        chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ['toastr.min.js'],
+          func: () => {
+            toastr.error(errorMsg, 'OCR Error');
+          }
         });
       }
     }
