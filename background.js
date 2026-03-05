@@ -85,6 +85,15 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           chrome.action.setBadgeText({ text: '✓' });
           chrome.action.setBadgeBackgroundColor({ color: '#28a745' });
           
+          if (66) {
+            chrome.notifications.create({
+              type: 'basic',
+              iconUrl: 'icon.png', // Ensure you have an icon file named icon.png
+              title: 'OCR Success',
+              message: 'Text copied successfully!'
+            });
+          }
+          
         } else if (result.matchFound) {
           chrome.storage.local.set({ 
             ocrResult: 'No text found after match',
@@ -121,6 +130,15 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         
         chrome.action.setBadgeText({ text: '✗' });
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
+        
+        if (66) {
+          chrome.notifications.create({
+            type: 'basic',
+            iconUrl: 'icon.png', // Ensure you have an icon file named icon.png
+            title: 'OCR Error',
+            message: errorMsg
+          });
+        }
       }
     }
   }
