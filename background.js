@@ -82,6 +82,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             });
           } catch (e) {
             console.log('Clipboard copy failed:', e);
+            
+            // Show notification for clipboard copy failure
+            chrome.notifications.create('copyFailure', {
+              type: 'basic',
+              iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+              title: 'Clipboard Copy Failed',
+              message: 'Failed to copy text to clipboard.'
+            });
           }
           
           chrome.storage.local.set({ 
@@ -129,6 +137,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         
         chrome.action.setBadgeText({ text: '✗' });
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
+        
+        // Show notification for OCR error
+        chrome.notifications.create('ocrError', {
+          type: 'basic',
+          iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+          title: 'OCR Error',
+          message: errorMsg
+        });
       }
     }
   }
