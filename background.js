@@ -74,22 +74,28 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             });
             
             // Show notification
-            chrome.notifications.create('clipboardCopied', {
-              type: 'basic',
-              iconUrl: 'icon.png', // Replace with your extension's icon path
-              title: 'Clipboard Copied',
-              message: 'Text has been copied to clipboard.'
-            });
+            if (chrome.notifications) {
+              chrome.notifications.create('clipboardCopied', {
+                type: 'basic',
+                title: 'Clipboard Copied',
+                message: 'Text has been copied to clipboard.'
+              });
+            } else {
+              console.error('Notifications API is not available.');
+            }
           } catch (e) {
             console.log('Clipboard copy failed:', e);
             
             // Show notification for clipboard copy failure
-            chrome.notifications.create('clipboardCopyFailed', {
-              type: 'basic',
-              iconUrl: 'icon.png', // Replace with your extension's icon path
-              title: 'Clipboard Copy Failed',
-              message: 'Failed to copy text to clipboard.'
-            });
+            if (chrome.notifications) {
+              chrome.notifications.create('clipboardCopyFailed', {
+                type: 'basic',
+                title: 'Clipboard Copy Failed',
+                message: 'Failed to copy text to clipboard.'
+              });
+            } else {
+              console.error('Notifications API is not available.');
+            }
           }
           
           chrome.storage.local.set({ 
@@ -139,12 +145,15 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         chrome.action.setBadgeBackgroundColor({ color: '#dc3545' });
         
         // Show notification for OCR error
-        chrome.notifications.create('ocrError', {
-          type: 'basic',
-          iconUrl: 'icon.png', // Replace with your extension's icon path
-          title: 'OCR Error',
-          message: errorMsg
-        });
+        if (chrome.notifications) {
+          chrome.notifications.create('ocrError', {
+            type: 'basic',
+            title: 'OCR Error',
+            message: errorMsg
+          });
+        } else {
+          console.error('Notifications API is not available.');
+        }
       }
     }
   }
