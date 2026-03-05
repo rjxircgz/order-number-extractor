@@ -76,7 +76,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             // Show notification
             chrome.notifications.create('copySuccess', {
               type: 'basic',
-              iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+              iconUrl: 'icons/icon16.png', // Updated icon path
               title: 'Clipboard Copied',
               message: 'Text has been copied to clipboard.'
             });
@@ -86,7 +86,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             // Show notification for clipboard copy failure
             chrome.notifications.create('copyFailure', {
               type: 'basic',
-              iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+              iconUrl: 'icons/icon16.png', // Updated icon path
               title: 'Clipboard Copy Failed',
               message: 'Failed to copy text to clipboard.'
             });
@@ -141,7 +141,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         // Show notification for OCR error
         chrome.notifications.create('ocrError', {
           type: 'basic',
-          iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+          iconUrl: 'icons/icon16.png', // Updated icon path
           title: 'OCR Error',
           message: errorMsg
         });
