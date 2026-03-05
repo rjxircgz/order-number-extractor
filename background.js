@@ -72,6 +72,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
               func: (text) => navigator.clipboard.writeText(text),
               args: [result.extractedValue]
             });
+            
+            // Show notification
+            chrome.notifications.create('copySuccess', {
+              type: 'basic',
+              iconUrl: '/path/to/icon.png', // Replace with the actual path to your icon
+              title: 'Clipboard Copied',
+              message: 'Text has been copied to clipboard.'
+            });
           } catch (e) {
             console.log('Clipboard copy failed:', e);
           }
